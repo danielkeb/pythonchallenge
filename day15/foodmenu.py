@@ -2,7 +2,7 @@ from menu import MENU,resources,profit
 #print(MENU['espresso'])
 
 profit = 0.0
-
+is_on=False
 def process_coins():
     print("please insert coins")
     q=int(input("how many quarters?: ")) * 0.25
@@ -21,21 +21,23 @@ def is_transaction_success(money_received,drink_cost):
         return False
     else:
         print("Sorry that's not enough money. Money refunded.")
+        is_on=True
         return True
 def make_coffee(drink_name,order_ingredient):
     for item in order_ingredient:
         resources[item]-=order_ingredient[item]
-        print(f"Here is your {drink_name}. Enjoy! ")
+    print(f"Here is your {drink_name}. Enjoy! ")
 
 
 def is_sufficient(drink):
     for item in drink:
         if drink[item]>=resources[item]:
             print(f"Sorry there is not enough {item}")
+            is_on=True
             return True
     return False
 
-is_on=False
+
 while not is_on:
     choice=input("What you you like? (espresso/latte/cappuccino): ").lower()
     if choice=='off':
