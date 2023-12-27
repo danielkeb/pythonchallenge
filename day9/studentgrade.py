@@ -15,6 +15,6 @@ for thing in student_score:
     elif student_score[thing] < 70:
         empty_score[thing] = "failed"
 
-print(empty_score["john"])
+print(empty_score)
 
 

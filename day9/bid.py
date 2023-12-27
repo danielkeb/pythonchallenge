@@ -2,27 +2,15 @@ from art import logo
 print(logo)
 
 
-bidders={}
-cont=False
-def find_highest_bidder(bidding_records):
-    highest_bid=0
-    winer=''
-    for bidder in bidding_records:
-        bid_amount=bidding_records[bidder]
-        if bid_amount>highest_bid:
-            highest_bid=bid_amount
-            winer=bidder
-    print(f"the winer is {winer} with highest number bids ${highest_bid} ")
-while not cont:
-   
+cont=True
+while cont:
     name=input("what is your name?:")
-    price=int(input("enter bid number: $"))
-    bidders[name]=price
+    bid=int(input("enter bid number"))
     
     cont=input("do you want to continoue 'yes' or 'no': ")
-    if cont == 'no':
+    if cont == 'yes':
         cont=True
-        find_highest_bidder(bidders)
-        
-    elif cont == 'yes':
+    elif cont == 'no':
         cont=False
+print(f"your bid number is  ${bid}")
+    
