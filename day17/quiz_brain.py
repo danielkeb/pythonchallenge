@@ -9,16 +9,12 @@ class QuizBrain:
 
     def next_question(self):
         
-        if self.still_question():
-            current_question = self.question_list[self.question_number]
-            self.question_number += 1
-            myans = input(f"Q. {self.question_number}: {current_question.text} (True/False): ")
-            self.check_answer(myans, current_question.answer)
-            is_on=True
-        else:
-            
-            is_on=False
 
+        current_question = self.question_list[self.question_number]
+        self.question_number += 1
+        myans = input(f"Q. {self.question_number}: {current_question.text} (True/False): ")
+        self.check_answer(myans, current_question.answer)
+          
     def check_answer(self, myans, correct_answer):
         if myans.lower() == correct_answer.lower():
             self.score += 1
