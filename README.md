@@ -7,7 +7,7 @@ Clone the Repository:
 
 bash
 Copy code
-git clone https://github.com/your-username/100-days-python-challenge.git
+git clone https://github.com/danielkeb/pythonchallenge.git
 cd 100-days-python-challenge
 Set Up Your Python Environment:
 
