@@ -6,11 +6,17 @@ ph= pandas.DataFrame(phonetic)
 #print(ph.to_dict())
 #TODO 1. Create a dictionary in this format:
 {"A": "Alfa", "B": "Bravo"}
-new_dict={value.letter: value.code for (key, value) in  ph.iterrows()}
+new_dict={value.letter: value.code for (key, value) in  phonetic.iterrows()}
+def phonet():
+    word=input("enter word: ").upper()
+    try:
+        my_word=[new_dict[letter] for letter in word]
+    except KeyError:
+        print("Sorry,only letters in the alphabet please!")
+        phonet()
 
-word=input("enter word: ").upper()
-my_word=[new_dict[letter] for letter in word]
 
-print(new_dict)
 
-print(my_word)
+    else:
+        print(my_word)
+phonet()

@@ -1,3 +1,4 @@
+import json
 from tkinter import *
 from tkinter import messagebox
 import pyperclip
@@ -28,25 +29,66 @@ def password_generator():
     #     passwd+= char
     password_entry.insert(0, passwd)
     pyperclip.copy(passwd)
-    print(passwd)
+   # print(passwd)
 
-    with open("data.txt", "r") as f:
-        print(f.readlines())
+    #with open("data.txt", "r") as f:
+        #print(f.readlines())
 
 def save():
 
     website_label = web_entry.get()
     email_label=email_entry.get()
     password_label = password_entry.get()
+    data_store= {
+        website_label:{
+        
+            'email':email_label,
+    
+            'password':password_label
+        }
+
+    }
     if website_label=="" or email_label=="" or password_label=="":
         messagebox.showinfo(title="Oops!", message="please make sure you haven't left any fields empty")
-    elif website_label != "" and email_label != "" and password_label !="":
-        is_ok= messagebox.askokcancel(title="website", message=f"These are the details entered: \nEmail :{email_label} \nPassword :{password_label} \nIs it ok to save?")
-        if is_ok:
-            with open('data.txt','a') as file:
-                file.write(f"{website_label}|{email_label} | {password_label} \n")  
-                web_entry.delete(0, END)  
-                password_entry.delete(0, END)
+    else:
+        try:
+            with open('data.json','r') as file:
+                data=json.load(file)
+                
+                #json.dump(data_store, file, indent=4),
+        except FileNotFoundError:
+            with open('data.json','w') as file:
+                json.dump(data_store, file, indent=4)
+          
+        else:
+            data.update(data_store)
+            with open('data.json','w') as file:
+                json.dump(data, file, indent=4)
+
+        finally:
+            web_entry.delete(0, END)  
+            password_entry.delete(0, END)
+
+def search():
+    try:
+        website_label=web_entry.get()
+        with open("data.json", "r") as dt:
+            file=json.load(dt)
+           
+
+    except FileNotFoundError:
+        messagebox.showinfo(title="error", message="File not found")
+    else:
+        if website_label in file:
+            email=file[website_label]['email']
+            password=file[website_label]['password']
+            messagebox.showinfo(title=website_label, message=f"email :{email}\n password :{password}")
+        else:
+            messagebox.showinfo(title=website_label, message="website name ot found")
+    
+            
+    finally:
+        print("successfully")
 
 canvas = Canvas(width=200, height=200, highlightthickness=0)
 photo = PhotoImage(file="logo.png")
@@ -56,8 +98,8 @@ canvas.grid(column=1, row=0, pady=20)
 website_label = Label(text="Website:")
 website_label.grid(column=0, row=1)
 
-web_entry = Entry(width=35)
-web_entry.grid(column=1, row=1, columnspan=2)
+web_entry = Entry(width=20)
+web_entry.grid(column=1, row=1)
 
 email_label = Label(text="Email/Username:")
 email_label.grid(column=0, row=2)
@@ -77,6 +119,8 @@ gen_password_button.grid(column=2, row=3, pady=0)  # Adjusted pady value
 
 add_button = Button(text="Add", width=35, command=save)
 add_button.grid(column=1, row=4, columnspan=2, pady=20)
+search_button = Button(text="Search", width=15, command=search)
+search_button.grid(column=2, row=1)
 
 
 
