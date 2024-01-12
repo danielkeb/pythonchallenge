@@ -55,8 +55,8 @@ card_backgrund=canvas.create_image(400, 263, image=card_front)
 canvas.grid(column=0, row=0, columnspan=2)
 canvas.config(bg=BACKGROUND_COLOR, highlightthickness=0)
 
-title=canvas.create_text(400, 150, text="Title", font=('Arial',40,'italic'))
-word=canvas.create_text(400, 263, text="word", font=('Arial',40,'bold'))
+title=canvas.create_text(400, 150, text="", font=('Arial',40,'italic'))
+word=canvas.create_text(400, 263, text="", font=('Arial',40,'bold'))
 
 
 wrong=PhotoImage(file="./images/wrong.png")
