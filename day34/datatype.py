@@ -1,4 +1,4 @@
-def police(age):
+def police(age:int):
     if age > 18:
         return True
     else:
